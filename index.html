@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2024 Recap | Thondon</title>
+    <meta
+      name="description"
+      content="A simple slideshow component with individual slide layouts and effects"
+    />
+    <meta
+      name="keywords"
+      content="slideshow, images, layout, asymmetric, css, html, javascript, template"
+    />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Gochi+Hand"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/slideshow.css" />
+    <link rel="stylesheet" type="text/css" href="css/slideshow_layouts.css" />
+    <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <style>
+        .ie-message {
+          display: inline-block;
+        }
+      </style>
+    <![endif]-->
+    <script>
+      document.documentElement.className = "js";
+    </script>
+  </head>
+  <body>
+    <svg class="hidden">
+      <defs>
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+          <title>arrow</title>
+          <polygon
+            points="6.3,12.8 20.9,12.8 20.9,11.2 6.3,11.2 10.2,7.2 9,6 3.1,12 9,18 10.2,16.8 "
+          />
+        </symbol>
+        <symbol id="icon-drop" viewBox="0 0 24 24">
+          <title>drop</title>
+          <path
+            d="M12,21c-3.6,0-6.6-3-6.6-6.6C5.4,11,10.8,4,11.4,3.2C11.6,3.1,11.8,3,12,3s0.4,0.1,0.6,0.3c0.6,0.8,6.1,7.8,6.1,11.2C18.6,18.1,15.6,21,12,21zM12,4.8c-1.8,2.4-5.2,7.4-5.2,9.6c0,2.9,2.3,5.2,5.2,5.2s5.2-2.3,5.2-5.2C17.2,12.2,13.8,7.3,12,4.8z"
+          />
+          <path
+            d="M12,18.2c-0.4,0-0.7-0.3-0.7-0.7s0.3-0.7,0.7-0.7c1.3,0,2.4-1.1,2.4-2.4c0-0.4,0.3-0.7,0.7-0.7c0.4,0,0.7,0.3,0.7,0.7C15.8,16.5,14.1,18.2,12,18.2z"
+          />
+        </symbol>
+        <symbol id="icon-prev" viewBox="0 0 100 50">
+          <title>prev</title>
+          <polygon
+            points="5.4,25 18.7,38.2 22.6,34.2 16.2,27.8 94.6,27.8 94.6,22.2 16.2,22.2 22.6,15.8 18.7,11.8"
+          />
+        </symbol>
+        <symbol id="icon-next" viewBox="0 0 100 50">
+          <title>next</title>
+          <polygon
+            points="81.3,11.8 77.4,15.8 83.8,22.2 5.4,22.2 5.4,27.8 83.8,27.8 77.4,34.2 81.3,38.2 94.6,25 "
+          />
+        </symbol>
+        <symbol id="icon-octicon" viewBox="0 0 24 24">
+          <title>octicon</title>
+          <path
+            d="M12,2.2C6.4,2.2,1.9,6.7,1.9,12.2c0,4.4,2.9,8.2,6.9,9.6c0.5,0.1,0.7-0.2,0.7-0.5c0-0.2,0-0.9,0-1.7c-2.8,0.6-3.4-1.4-3.4-1.4C5.6,17.1,5,16.8,5,16.8C4.1,16.2,5,16.2,5,16.2c1,0.1,1.5,1,1.5,1c0.9,1.5,2.4,1.1,2.9,0.8c0.1-0.7,0.4-1.1,0.6-1.3c-2.2-0.3-4.6-1.1-4.6-5c0-1.1,0.4-2,1-2.7C6.5,8.8,6.2,7.7,6.7,6.4c0,0,0.8-0.3,2.8,1C10.3,7.2,11.1,7.1,12,7c0.9,0,1.7,0.1,2.5,0.3c1.9-1.3,2.8-1,2.8-1c0.5,1.4,0.2,2.4,0.1,2.7c0.6,0.7,1,1.6,1,2.7c0,3.9-2.4,4.7-4.6,5c0.4,0.3,0.7,0.9,0.7,1.9c0,1.3,0,2.4,0,2.8c0,0.3,0.2,0.6,0.7,0.5c4-1.3,6.9-5.1,6.9-9.6C22.1,6.7,17.6,2.2,12,2.2z"
+          />
+        </symbol>
+        <!-- From Karen Menezes: https://www.smashingmagazine.com/2015/05/creating-responsive-shapes-with-clip-path/ -->
+        <clipPath id="polygon-clip-rhomboid" clipPathUnits="objectBoundingBox">
+          <polygon points="0 1, 0.3 0, 1 0, 0.7 1" />
+        </clipPath>
+      </defs>
+    </svg>
+    <main>
+      <header class="codrops-header">
+        <h1 class="codrops-header__title">2024 Thondon Recap</h1>
+        <p class="codrops-header__tagline">A Year of Proving</p>
+        <p class="ie-message">
+          Please note that your browser does not support the
+          <a href="http://caniuse.com/#search=clip-path"
+            >CSS clip-path property</a
+          >.
+        </p>
+      </header>
+      <div class="slideshow" tabindex="0">
+        <div class="slide slide--layout-1" data-layout="layout1">
+          <div class="slide-imgwrap">
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/1.png)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/2.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/3.jpg)"
+              ></div>
+            </div>
+          </div>
+          <div class="slide__title">
+            <h3 class="slide__title-main">You Can't</h3>
+            <p class="slide__title-sub">
+              Many people think it’s unrealistic for someone to excel both
+              academically and in extracurricular activities, since each
+              requires a different area of expertise.
+            </p>
+          </div>
+        </div>
+        <!-- /slide -->
+        <div class="slide slide--layout-2" data-layout="layout2">
+          <div class="slide-imgwrap">
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/4.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/5.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/6.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/7.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/8.jpg)"
+              >
+                <h4 class="slide__img-caption">Winners . Learn . Everything</h4>
+              </div>
+            </div>
+          </div>
+          <div class="slide__title">
+            <h3 class="slide__title-main">I'm Tired</h3>
+            <p class="slide__title-sub">
+              Being tired is not a reason to quit. It’s a reminder to pause,
+              reflect, and remember why you started.
+            </p>
+          </div>
+        </div>
+        <!-- /slide -->
+        <div class="slide slide--layout-3" data-layout="layout3">
+          <!--<div class="slide-imgwrap">
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/9.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/10.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/11.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/15.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/13.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/14.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/12.jpg)"
+              ></div>
+            </div>
+          </div>-->
+          <div class="slide__title">
+            <h3 class="slide__title-main">It's Too Late</h3>
+            <p class="slide__title-sub">
+              It’s never too late to start—<br />while your loved ones are still
+              alive.<br />Delay too long, and life may end before success
+              begins.
+            </p>
+          </div>
+        </div>
+        <!-- /slide -->
+        <div class="slide slide--layout-4" data-layout="layout4">
+          <!--<div class="slide-imgwrap">
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/10.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/8.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/11.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/13.jpg)"
+              ></div>
+            </div>
+          </div>-->
+          <div class="slide__title">
+            <h3 class="slide__title-main">Anything is Possible</h3>
+            <p class="slide__title-sub">
+              Everything is always possible.<br />It only depends on whether you
+              dare to do it.<br />I’ve already proven it to everyone.
+            </p>
+          </div>
+        </div>
+        <!-- /slide -->
+        <div class="slide slide--layout-5" data-layout="layout5">
+          <div class="slide-imgwrap">
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/1.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/2.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/3.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/4.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/5.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/6.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/7.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/8.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/9.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/10.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/11.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/12.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/13.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/14.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/15.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/16.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/17.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/small/18.jpg)"
+              ></div>
+            </div>
+          </div>
+          <div class="slide__title">
+            <h3 class="slide__title-main">Only You</h3>
+            <p class="slide__title-sub">
+              Watching others succeed while you don’t isn’t happiness.<br />It’s
+              a sign that your motivation isn’t strong enough yet.<br />Don’t
+              lose something before you even begin.
+            </p>
+          </div>
+        </div>
+        <!-- /slide -->
+        <div class="slide slide--layout-6" data-layout="layout6">
+          <!--<div class="slide-imgwrap">
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/14.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/11.jpg)"
+              ></div>
+            </div>
+            <div class="slide__img">
+              <div
+                class="slide__img-inner"
+                style="background-image: url(img/3.jpg)"
+              ></div>
+            </div>
+          </div>-->
+          <div class="slide__title">
+            <p class="slide__title-sub">
+              This year, I’ve proven many things.<br />I understand where
+              everyone is coming from.<br />And I don’t want anyone to lose a
+              life<br />just to give you a reason to start.<br />That was my
+              first mistake.
+            </p>
+          </div>
+        </div>
+        <!-- /slide -->
+        <nav class="slideshow__nav slideshow__nav--arrows">
+          <button
+            id="prev-slide"
+            class="btn btn--arrow"
+            aria-label="Previous slide"
+          >
+            <svg class="icon icon--prev">
+              <use xlink:href="#icon-prev"></use>
+            </svg>
+          </button>
+          <button
+            id="next-slide"
+            class="btn btn--arrow"
+            aria-label="Next slide"
+          >
+            <svg class="icon icon--next">
+              <use xlink:href="#icon-next"></use>
+            </svg>
+          </button>
+        </nav>
+      </div>
+      <!-- /slideshow -->
+      <div class="content content--text">
+        <p>
+          <strong
+            >2024 was not a year of perfection, but a year of proof.</strong
+          >
+        </p>
+        <p>
+          This year, someone challenged me to live life the way they did—to
+          struggle the way they did. They said that if I was truly capable, I
+          should be able to do anything, no matter the circumstances.
+        </p>
+        <p>
+          So I chose to give up one full year to become a real high school
+          student. I stayed up late studying, completed assignments endlessly,
+          and lived the routine that society expects from someone at that stage
+          of life. I did my best—not by my own standards, but by the standards
+          of those who believe this is what a high school student should be.
+        </p>
+        <p>
+          I didn’t do this to prove superiority. I did it to understand. And
+          through living it, I earned the right to speak—not from imagination,
+          but from experience.
+        </p>
+      </div>
+    </main>
+
+    <div class="container">
+      <details>
+        <summary>
+          <div class="button">See What's Challenge at 2025</div>
+          <div class="details-modal-overlay"></div>
+        </summary>
+        <div class="details-modal">
+          <div class="details-modal-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M13.7071 1.70711C14.0976 1.31658 14.0976 0.683417 13.7071 0.292893C13.3166 -0.0976311 12.6834 -0.0976311 12.2929 0.292893L7 5.58579L1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.0976311 0.683417 -0.0976311 1.31658 0.292893 1.70711L5.58579 7L0.292893 12.2929C-0.0976311 12.6834 -0.0976311 13.3166 0.292893 13.7071C0.683417 14.0976 1.31658 14.0976 1.70711 13.7071L7 8.41421L12.2929 13.7071C12.6834 14.0976 13.3166 14.0976 13.7071 13.7071C14.0976 13.3166 14.0976 12.6834 13.7071 12.2929L8.41421 7L13.7071 1.70711Z"
+                fill="black"
+              />
+            </svg>
+          </div>
+          <div class="details-modal-title">
+            <h1>Select students who are ready to learn extensively.</h1>
+          </div>
+          <div class="details-modal-content">
+            <p>
+              <strong>If you see this message, the challenge has ended.</strong>
+            </p>
+			<p><strong>This challenge is designed to select suitable participants, not to eliminate unsuitable ones, since at the beginning we did not know who would be participating.</strong></p>
+            <p>
+              <strong>Award Recipients:</strong><br />
+              Even though no one receives the award in 2025, don’t be
+              discouraged. In the coming years, I will always continue to look
+              for opportunities. You just won’t know when—and no one else will
+              either—because those who receive it must always possess the
+              required qualities within themselves.
+            </p>
+
+            <p>
+              This challenge is meant to select those who have an intense desire
+              to learn, because they have already learned the value of time that
+              has been wasted. You will receive the message:
+            </p>
+
+            <blockquote>
+              <p>
+                “I got very good exam scores even without studying beforehand,
+                and I was casually playing games too.”
+              </p>
+            </blockquote>
+
+            <p>
+              I know very well that you might think I’m bragging, which is
+              normal. But what I’m looking for are responses such as:
+            </p>
+
+            <ul>
+              <li>“How did you do it?”</li>
+              <li>“How does it work?”</li>
+              <li>“Are there any tips?”</li>
+              <li>
+                Or anything else that shows you are ready to learn from
+                everything.
+              </li>
+            </ul>
+
+            <p>
+              <strong>Why this question?</strong><br />
+              Because simply giving someone my support would be easy—but how
+              ready are they to truly become capable? I understand that high
+              school life is often too fun to worry about where it will lead.
+              Still, I want to help those who think:
+            </p>
+
+            <blockquote>
+              <p>
+                “I don’t have much time left. I need to study and also be happy
+                with the people I love. How can I make the best use of the time
+                I have?”
+              </p>
+            </blockquote>
+
+            <p>
+              They have already realized that once in a lifetime, time that is
+              lost cannot be recovered, and that what remains must be used to
+              the fullest—until the lives of those they love become greater than
+              their own pride.
+            </p>
+
+            <p>— <strong>Thondon</strong></p>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <style>
+      .container {
+        text-align: center;
+        max-width: 40em;
+        padding: 2em;
+
+        .button {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background: #16a34a;
+          border-radius: 0.25em;
+          color: white;
+          cursor: pointer;
+          display: inline-block;
+          font-weight: 500;
+          height: 3em;
+          line-height: 3em;
+          padding: 0 1em;
+        }
+        .button:hover {
+          background-color: #17ac4e;
+        }
+
+        .details-modal {
+          background: #ffffff;
+          border-radius: 0.5em;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          left: 50%;
+          max-width: 90%;
+          pointer-events: none;
+          position: fixed;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 30em;
+          text-align: left;
+          max-height: 90vh;
+          display: flex;
+          flex-direction: column;
+        }
+        .details-modal .details-modal-close {
+          align-items: center;
+          color: #111827;
+          display: flex;
+          height: 4.5em;
+          justify-content: center;
+          pointer-events: none;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 4.5em;
+        }
+        .details-modal .details-modal-close svg {
+          display: block;
+        }
+        .details-modal .details-modal-title {
+          color: #111827;
+          padding: 1.5em 2em;
+          pointer-events: all;
+          position: relative;
+          width: calc(100% - 4.5em);
+        }
+        .details-modal .details-modal-title h1 {
+          font-size: 1.25rem;
+          font-weight: 600;
+          line-height: normal;
+        }
+        .details-modal .details-modal-content {
+          border-top: 1px solid #e0e0e0;
+          padding: 2em;
+          pointer-events: all;
+          overflow: auto;
+        }
+
+        .details-modal-overlay {
+          transition: opacity 0.2s ease-out;
+          pointer-events: none;
+          background: rgba(15, 23, 42, 0.8);
+          position: fixed;
+          opacity: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          top: 0;
+        }
+        details[open] .details-modal-overlay {
+          pointer-events: all;
+          opacity: 0.5;
+        }
+
+        details summary {
+          list-style: none;
+        }
+        details summary:focus {
+          outline: none;
+        }
+        details summary::-webkit-details-marker {
+          display: none;
+        }
+
+        code {
+          font-family: Monaco, monospace;
+          line-height: 100%;
+          background-color: #2d2d2c;
+          padding: 0.1em 0.4em;
+          letter-spacing: -0.05em;
+          word-break: normal;
+          border-radius: 7px;
+          color: white;
+          font-weight: normal;
+          font-size: 1.75rem;
+          position: relative;
+          top: -2px;
+        }
+      }
+      .container > h1 {
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: normal;
+        color: #111827;
+      }
+      .container > p {
+        margin-top: 2em;
+        margin-bottom: 2em;
+      }
+      .container sup {
+        font-size: 1rem;
+        margin-left: 0.25em;
+        opacity: 0.5;
+        position: relative;
+      }
+    </style>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      (function () {
+        var slideshow = new MLSlideshow(document.querySelector(".slideshow"));
+
+        document
+          .querySelector("#next-slide")
+          .addEventListener("click", function () {
+            slideshow.next();
+          });
+
+        document
+          .querySelector("#prev-slide")
+          .addEventListener("click", function () {
+            slideshow.prev();
+          });
+      })();
+    </script>
+  </body>
+</html>
