@@ -36,6 +36,95 @@
     </script>
   </head>
   <body>
+    <div id="audio-overlay">
+      <style>
+        #audio-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.85);
+          color: white;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: default;
+        }
+
+        .audio-overlay-content {
+          font-size: 1.25rem;
+          font-weight: 500;
+          text-align: center;
+        }
+
+        .audio-buttons {
+          margin-top: 1.5rem;
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+        }
+
+        .audio-btn {
+          background: #16a34a;
+          border: none;
+          padding: 0.6em 1.5em;
+          border-radius: 0.375em;
+          color: white;
+          font-size: 1rem;
+          cursor: pointer;
+        }
+
+        .audio-btn.no {
+          background: #374151;
+        }
+
+        .audio-btn:hover {
+          opacity: 0.9;
+        }
+      </style>
+
+      <div class="audio-overlay-content">
+        <p>Do you want to listen to the overall-year playlist?</p>
+
+        <div class="audio-buttons">
+          <button class="audio-btn yes">Yes</button>
+          <button class="audio-btn no">No</button>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          const overlay = document.getElementById("audio-overlay");
+          const yesBtn = overlay.querySelector(".audio-btn.yes");
+          const noBtn = overlay.querySelector(".audio-btn.no");
+
+          const song1 = new Audio("./song/1.mp3");
+          const song2 = new Audio("./song/2.mp3");
+
+          song1.preload = "auto";
+          song2.preload = "auto";
+
+          // Chain playback
+          song1.addEventListener("ended", () => {
+            song2.play().catch(() => {});
+          });
+
+          // YES → play music
+          yesBtn.addEventListener("click", () => {
+            overlay.style.display = "none";
+
+            song1.play().catch((err) => {
+              console.warn("Audio play failed:", err);
+            });
+          });
+
+          // NO → close overlay, do nothing forever
+          noBtn.addEventListener("click", () => {
+            overlay.style.display = "none";
+          });
+        })();
+      </script>
+    </div>
+
     <svg class="hidden">
       <defs>
         <symbol id="icon-arrow" viewBox="0 0 24 24">
@@ -485,7 +574,13 @@
             <p>
               <strong>If you see this message, the challenge has ended.</strong>
             </p>
-			<p><strong>This challenge is designed to select suitable participants, not to eliminate unsuitable ones, since at the beginning we did not know who would be participating.</strong></p>
+            <p>
+              <strong
+                >This challenge is designed to select suitable participants, not
+                to eliminate unsuitable ones, since at the beginning we did not
+                know who would be participating.</strong
+              >
+            </p>
             <p>
               <strong>Award Recipients:</strong><br />
               Even though no one receives the award in 2025, don’t be
