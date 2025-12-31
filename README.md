@@ -1,12 +1,8 @@
-# Multi-Layout Slideshow
+My first year to do this was 2023, but it's too late so first web page was 2024.
 
-A simple decorative slideshow component with individual slide layouts and effects. 
-
-![Multi-Layout Slideshow](http://tympanus.net/codrops/wp-content/uploads/2016/07/MultiLayoutSlideshow_800x600.jpg)
-
-[Article on Codrops](http://tympanus.net/codrops/?p=27363)
-
-[Demo](http://tympanus.net/Development/MultiLayoutSlideshow/)
+\[2023] A Year of Improvement
+\[2024] A Year of Proving
+\[2025] A Year of ...
 
 ## License
 
